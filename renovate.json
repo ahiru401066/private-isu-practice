@@ -1,0 +1,91 @@
+{
+  "extends": [
+    "config:recommended"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/provisioning/image/ansible/04_xbuild.yml/"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\n.*?-install v?(?<currentValue>[0-9.]*).*\n"
+      ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/provisioning/bench/ansible/02_golang.yml/"
+      ],
+      "datasourceTemplate": "golang-version",
+      "depNameTemplate": "go",
+      "matchStrings": [
+        "go(?<currentValue>[0-9]*.[0-9]*.[0-9]*)"
+      ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/.github/workflows/codeql.yml/"
+      ],
+      "datasourceTemplate": "golang-version",
+      "depNameTemplate": "go",
+      "matchStrings": [
+        "go-version: \"?(?<currentValue>[0-9]*.[0-9]*.[0-9]*)\"?"
+      ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/osv-scanner.toml/"
+      ],
+      "datasourceTemplate": "golang-version",
+      "depNameTemplate": "go",
+      "matchStrings": [
+        "GoVersionOverride = \"?(?<currentValue>[0-9]*.[0-9]*.[0-9]*)\"?"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "nginx"
+      ],
+      "versioning": "regex:^(?<major>[0-9]+)\\.(?<minor>[0-9]*[02468])(?<patch>\\d*)$"
+    },
+    {
+      "matchManagers": [
+        "bundler"
+      ],
+      "rangeStrategy": "update-lockfile"
+    },
+    {
+      "matchManagers": [
+        "composer"
+      ],
+      "rangeStrategy": "update-lockfile"
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchManagers": [
+        "pep621"
+      ],
+      "rangeStrategy": "bump"
+    }
+  ],
+  "postUpdateOptions": [
+    "gomodTidy",
+    "gomodUpdateImportPaths"
+  ]
+}
