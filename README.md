@@ -1,3 +1,8 @@
+# private-isu（個人チューニング記録）
+
+このリポジトリは private-isu を用いた個人的な ISUCON 学習・チューニング記録です。
+
+
 ## ISUCON Scoreboard
 
 | Date | PR | Score | Main change | Notes |
