@@ -8,3 +8,4 @@
 | Date | PR | Score | Main change | Notes |
 |------|----|-------|------------|-------|
 | 2026-02-01 | [#1](https://github.com/ahiru401066/private-isu-practice/pull/1) | 0 | 初期状態 | タイムアウト多発 |
+| 2026-02-03 | [#5](https://github.com/ahiru401066/private-isu-practice/pull/5) | 31289 | comments tableへ index追加 | リクエスト失敗なし |
