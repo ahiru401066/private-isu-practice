@@ -1,0 +1,1 @@
+ALTER TABLE comments DROP INDEX post_id_idx;
